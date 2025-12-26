@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regalo Especial Navideño</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Copos de nieve animados -->
+    <div class="snowflakes"></div>
+
+    <div class="container">
+      <div class="header">
+        <h1><i class="fas fa-gift"></i> miyaaa</h1>
+        <p class="intro-message">
+          "Un pequeño regalo para mi linda princesa..."
+        </p>
+      </div>
+
+      <div class="countdown-container">
+        <h2 class="countdown-title">La sorpresa se revelará en:</h2>
+        <div class="countdown">
+          <div class="countdown-item">
+            <div class="countdown-number" id="days">00</div>
+            <div class="countdown-label">Días</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="hours">00</div>
+            <div class="countdown-label">Horas</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="minutes">00</div>
+            <div class="countdown-label">Minutos</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="seconds">00</div>
+            <div class="countdown-label">Segundos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gift-btn-container">
+        <button class="gift-btn" id="openGiftBtn">
+          <i class="fas fa-gift"></i> Abrir Regalo
+        </button>
+      </div>
+
+      <!-- Contenedor de la sorpresa (oculto inicialmente) -->
+      <div class="surprise-container" id="surpriseContainer">
+        <h2 class="surprise-title">¡Feliz Navidad!</h2>
+
+        <div class="message-box">
+          <div class="special-message" id="specialMessage">
+            <p>Para mi dulce princesa,</p>
+
+            <p>
+              Asumo que estás leyendo esta carta uno o dos días después de
+              Navidad, pero aun así: ¡feliz Navidad! Quería decirte que hice
+              unas lindas flores para ti. Sé que es algo pequeño y sencillo, y
+              que tal vez no sea mucho, pero las hice con todo mi cariño, aunque
+              no tenía muchas hojas de colores.
+            </p>
+
+            <p>
+              Este es el segundo año que pasamos la Navidad juntos y estoy
+              seguro de que vendrán muchas más. Tú sabes que mi amor por ti es
+              infinito y que, con cada día que pasa, solo crece un poquito más.
+            </p>
+
+            <p>
+              Gracias por cuidar de este tonto chico y por estar siempre para
+              mí. A veces no soy perfecto, pero quiero que sepas que mi
+              intención siempre es hacerte sentir amada, tranquila y segura.
+              Estaré contigo en cada momento, recordándote que eres la única
+              persona que amo y que nunca estarás sola mientras yo esté a tu
+              lado.
+            </p>
+
+            <p>
+              Gracias por todo, mi dulce princesa. Espero que esta carta no
+              llegue demasiado tarde.
+            </p>
+          </div>
+        </div>
+
+        <div class="flower-container">
+          <div class="hearts" id="heartsContainer"></div>
+          <!-- REEMPLAZA ESTA URL CON LA FOTO DE TU FLOR -->
+          <img
+            src="flor.jpeg"
+            alt="Flor especial navideña"
+            class="flower-image"
+            id="flowerImage"
+          />
+          <p class="caption">Una flor especial para una persona especial</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>
+          Hecho con <i class="fas fa-heart" style="color: #ff6b6b"></i> para ti
+          - ¡Felices Fiestas!
+        </p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
