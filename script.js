@@ -43,19 +43,25 @@ function createSnowflakes() {
 
 // Cuenta regresiva
 function updateCountdown() {
-  // Usar el objetivo establecido (fall back a la fecha fija si no está definido)
+  // Usar el objetivo establecido (persistido en localStorage si existe)
   const targetDate =
-    countdownTarget ?? new Date("December 25, 2024 00:00:00").getTime();
+    countdownTarget ??
+    (() => {
+      // fallback por si no hay target (muy improbable si inicializamos correctamente)
+      return new Date("December 25, 2024 00:00:00").getTime();
+    })();
 
   const now = new Date().getTime();
   const timeLeft = targetDate - now;
 
-  // Si ya pasó la fecha, mostramos ceros
-  if (timeLeft < 0) {
+  // Si ya pasó la fecha, mostramos ceros y mostramos el botón para abrir el regalo
+  if (timeLeft <= 0) {
     document.getElementById("days").textContent = "00";
     document.getElementById("hours").textContent = "00";
     document.getElementById("minutes").textContent = "00";
     document.getElementById("seconds").textContent = "00";
+    const openBtn = document.getElementById("openGiftBtn");
+    if (openBtn) openBtn.style.display = "inline-flex";
     return;
   }
 
@@ -88,6 +94,13 @@ function showSurprise() {
   const openGiftBtn = document.getElementById("openGiftBtn");
   const countdownContainer = document.querySelector(".countdown-container");
   const introMessage = document.querySelector(".intro-message");
+
+  // limpiar el objetivo guardado para que el temporizador no "permanezca" después de abrir
+  try {
+    localStorage.removeItem("countdownTarget");
+  } catch (e) {
+    /* ignore */
+  }
 
   // Ocultar elementos iniciales
   openGiftBtn.style.display = "none";
@@ -209,8 +222,25 @@ function replaceFlowerImage() {
 
 // Inicializar
 document.addEventListener("DOMContentLoaded", function () {
-  // establecer el temporizador a 30 minutos desde ahora
-  countdownTarget = Date.now() + 30 * 60 * 1000; // 30 minutos en ms
+  // leer objetivo guardado en localStorage (si existe y no expiró), si no -> crear nuevo de 30 minutos
+  try {
+    const stored = localStorage.getItem("countdownTarget");
+    if (stored) {
+      const ts = parseInt(stored, 10);
+      if (!isNaN(ts) && ts > Date.now()) {
+        countdownTarget = ts;
+      } else {
+        countdownTarget = Date.now() + 30 * 60 * 1000;
+        localStorage.setItem("countdownTarget", String(countdownTarget));
+      }
+    } else {
+      countdownTarget = Date.now() + 30 * 60 * 1000;
+      localStorage.setItem("countdownTarget", String(countdownTarget));
+    }
+  } catch (e) {
+    // si localStorage no está disponible, caer en el comportamiento por defecto (se reiniciará al recargar)
+    countdownTarget = Date.now() + 30 * 60 * 1000;
+  }
 
   createSnowflakes();
   updateCountdown();
